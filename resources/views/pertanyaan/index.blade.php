@@ -28,24 +28,44 @@
               </div>
               <!-- /.card-header -->
               <div class="card-body p-0">
-                <table class="table">
+                <table class="table table-bordered">
                   <thead>
                     <tr>
                       <th style="width: 10px">No.</th>
-                      <th style="width: 245px">Judul</th>
-                      <th>Isi</th>
-                      <th>Jawab</th>
+                      <th style="width: 245px; text-align: center">Judul</th>
+                      <th style="text-align: center">Isi</th>
+                      <th style="text-align: center">Aksi</th>
                     </tr>
                   </thead>
                   <tbody>
                     @foreach ($pertanyaan as $key => $item)
                     <tr>
                         <td> {{ $item->id }} </td>
-                        <td>  <a href="/jawaban/{{ $item->id }}">{{ $item->judul }}</a>  </td>
+                        <td>  <a href="/pertanyaan/{{ $item->id }}">{{ $item->judul }}</a>  </td>
                         <td> {{ $item->isi }} </td>
-                        <td class="d-flex justify-content-center">
+                        <td class="align-middle">
                           <!-- Modal Bootstrap -->
-                          <button type="button" class="btn btn-primary" data-toggle="modal" data-pertanyaan="{{ $item->isi }}"  data-path="/jawaban/{{ $item->id }}" data-target="#jawab"><i class="fas fa-plus-circle"></i></button>
+                          <ul class="pagination pagination-sm m-0 d-flex justify-content-center">
+                            <li class="page-item">
+                              <button title="Jawab" type="button" class="btn btn-success btn-sm" data-toggle="modal" data-pertanyaan="{{ $item->isi }}"  data-path="/jawaban/{{ $item->id }}" data-target="#jawab"><i class="fas fa-plus-square"></i></button>
+                            </li>
+                            <li class="page-item">
+                              <a href="/pertanyaan/{{ $item->id }}/edit">
+                              <button title="Edit" type="button" class="btn btn-primary btn-sm ml-2">
+                                <i class="fas fa-pen-square"></i>
+                              </button>
+                              </a>
+                            </li>
+                            <li class="page-item">
+                              <form action="/pertanyaan/{{ $item->id }}" method="post">
+                                @method('DELETE')
+                                @csrf
+                                <button title="Hapus" type="submit" class="btn btn-danger btn-sm ml-2">
+                                  <i class="fas fa-minus-square"></i>
+                                </button>
+                              </form>
+                            </li>
+                          </ul>
                           <div class="modal fade" id="jawab" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                               <div class="modal-content">

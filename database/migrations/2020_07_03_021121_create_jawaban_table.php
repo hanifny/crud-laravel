@@ -16,7 +16,8 @@ class CreateJawabanTable extends Migration
         Schema::create('jawaban', function (Blueprint $table) {
             $table->id();;
             $table->string('isi');
-            $table->timestamps();
+            $table->timestamp('created_at')->default(\DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('updated_at')->default(\DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
         });
         Schema::table('jawaban', function (Blueprint $table) {
             $table->unsignedBigInteger('pertanyaan_id');

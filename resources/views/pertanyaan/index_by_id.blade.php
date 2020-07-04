@@ -6,7 +6,9 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>{{ $pertanyaan[0]->judul }}</h1>
+            <h1>{{ $pertanyaan[0]->judul }}</h1><br>
+            <h6 style="color: grey;">Pertanyaan dibuat : {{ $pertanyaan[0]->created_at }}</h6>
+            <h6 style="color: grey; line-height: 0;">Pertanyaan diperbaharui : {{ $pertanyaan[0]->updated_at }}</h6>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -17,6 +19,7 @@
         </div>
       </div><!-- /.container-fluid -->
     </section>
+
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
